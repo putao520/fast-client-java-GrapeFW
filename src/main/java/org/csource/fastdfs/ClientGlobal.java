@@ -10,6 +10,7 @@ package org.csource.fastdfs;
 
 import org.csource.common.IniFileReader;
 import org.csource.common.MyException;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,6 +61,65 @@ public class ClientGlobal {
   public static TrackerGroup g_tracker_group;
 
   private ClientGlobal() {
+  }
+
+  public static void initByJSON(String confString) throws MyException {
+    initByJSON(JSONObject.toJSON(confString));
+  }
+
+  private static int l2i(Object l){
+    int ri = 0;
+    if( l instanceof Long ){
+      ri = Integer.valueOf( ((Long)l).toString() );
+    }
+    else if( l instanceof Integer ){
+      ri = (Integer) l;
+    }
+    return ri;
+  }
+
+  public static void initByJSON(JSONObject confJSON) throws MyException {
+    String[] szTrackerServers;
+    String[] parts;
+
+    g_connect_timeout = l2i(confJSON.get("connect_timeout",DEFAULT_CONNECT_TIMEOUT));
+    if (g_connect_timeout < 0) {
+      g_connect_timeout = DEFAULT_CONNECT_TIMEOUT;
+    }
+    g_connect_timeout *= 1000; //millisecond
+
+    g_network_timeout = l2i(confJSON.get("network_timeout", DEFAULT_NETWORK_TIMEOUT));
+    if (g_network_timeout < 0) {
+      g_network_timeout = DEFAULT_NETWORK_TIMEOUT;
+    }
+    g_network_timeout *= 1000; //millisecond
+
+    g_charset = confJSON.getString("charset");
+    if (g_charset == null || g_charset.length() == 0) {
+      g_charset = "ISO8859-1";
+    }
+
+    szTrackerServers = ((String)confJSON.get("tracker_server")).split(",");
+    if (szTrackerServers == null) {
+      throw new MyException("item \"tracker_server\" in " + "JSON" + " not found");
+    }
+
+    InetSocketAddress[] tracker_servers = new InetSocketAddress[szTrackerServers.length];
+    for (int i = 0; i < szTrackerServers.length; i++) {
+      parts = szTrackerServers[i].split("\\:", 2);
+      if (parts.length != 2) {
+        throw new MyException("the value of item \"tracker_server\" is invalid, the correct format is host:port");
+      }
+
+      tracker_servers[i] = new InetSocketAddress(parts[0].trim(), Integer.parseInt(parts[1].trim()));
+    }
+    g_tracker_group = new TrackerGroup(tracker_servers);
+
+    g_tracker_http_port = l2i(confJSON.get("http.tracker_http_port", 80));
+    g_anti_steal_token = (Boolean)confJSON.get("http.anti_steal_token", false);
+    if (g_anti_steal_token) {
+      g_secret_key = confJSON.getString("http.secret_key");
+    }
   }
 
   /**

@@ -2,12 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.csource</groupId>
+  <groupId>GrapeSoft</groupId>
   <artifactId>fastdfs-client-java</artifactId>
-  <version>1.27-SNAPSHOT</version>
+  <version>1.27.2</version>
   <name>fastdfs-client-java</name>
   <description>fastdfs client for java</description>
   <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>grape</groupId>
+      <artifactId>json-putao520</artifactId>
+      <version>1.5.1</version>
+    </dependency>
+  </dependencies>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,5 +39,13 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>GrapeSoft</id>
+      <name>GrapeSoft</name>
+      <url>http://maven.putao282.com:8081/repository/GrapeSoft/</url>
+    </repository>
+  </distributionManagement>
 
 </project>
