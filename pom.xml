@@ -4,16 +4,16 @@
 
   <groupId>GrapeSoft</groupId>
   <artifactId>fastdfs-client-java</artifactId>
-  <version>1.27.2</version>
+  <version>1.30</version>
   <name>fastdfs-client-java</name>
   <description>fastdfs client for java</description>
   <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
-      <groupId>grape</groupId>
+      <groupId>GrapeSoft</groupId>
       <artifactId>json-putao520</artifactId>
-      <version>1.5.1</version>
+      <version>1.5.6</version>
     </dependency>
   </dependencies>
 
@@ -22,7 +22,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
     <maven.test.skip>true</maven.test.skip>
-    <jdk.version>1.6</jdk.version>
+    <jdk.version>1.8</jdk.version>
   </properties>
 
   <build>
