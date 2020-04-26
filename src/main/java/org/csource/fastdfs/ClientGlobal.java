@@ -60,6 +60,7 @@ public class ClientGlobal {
 
   public static TrackerGroup g_tracker_group;
 
+
   private ClientGlobal() {
   }
 
@@ -76,6 +77,10 @@ public class ClientGlobal {
       ri = (Integer) l;
     }
     return ri;
+  }
+
+  public static final boolean isInit(){
+    return g_tracker_group != null;
   }
 
   public static void initByJSON(JSONObject confJSON) throws MyException {

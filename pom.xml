@@ -4,7 +4,7 @@
 
   <groupId>GrapeSoft</groupId>
   <artifactId>fastdfs-client-java</artifactId>
-  <version>1.30</version>
+  <version>1.062</version>
   <name>fastdfs-client-java</name>
   <description>fastdfs client for java</description>
   <packaging>jar</packaging>
@@ -13,7 +13,7 @@
     <dependency>
       <groupId>GrapeSoft</groupId>
       <artifactId>json-putao520</artifactId>
-      <version>1.5.6</version>
+      <version>1.062</version>
     </dependency>
   </dependencies>
 
@@ -44,7 +44,7 @@
     <repository>
       <id>GrapeSoft</id>
       <name>GrapeSoft</name>
-      <url>http://maven.putao282.com:8081/repository/GrapeSoft/</url>
+      <url>http://mvn.putao282.com:8081/repository/GrapeSoft/</url>
     </repository>
   </distributionManagement>
 
